@@ -3,11 +3,12 @@ package model.tarefa;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class exibeFormCadastroUsuarioTarefa implements Tarefa {
+public class BuscarTurma implements Tarefa{
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return "cadastroUsuario";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
