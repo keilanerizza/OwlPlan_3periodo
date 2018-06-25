@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/keilanerizza/OwlPlan/issues"
   },
-  "homepage": "https://github.com/keilanerizza/OwlPlan#readme"
+  "homepage": "https://github.com/keilanerizza/OwlPlan#readme",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
 }
