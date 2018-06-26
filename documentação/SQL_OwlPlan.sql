@@ -2,18 +2,18 @@ create database owlplan;
 use owlplan;
 
 CREATE TABLE usuario (
-login varchar (50) PRIMARY KEY,
+id_user int AUTO_INCREMENT PRIMARY KEY,
+email varchar (50),
 senha varchar (10)
 );
 
 CREATE TABLE pedagoga (
-id_user int AUTO_INCREMENT PRIMARY KEY,
-foto varchar (100),
+id_pedagoga int AUTO_INCREMENT PRIMARY KEY,
 nome varchar (100),
 sexo char,
 nasc date,
-login varchar (50),
-FOREIGN KEY (login) REFERENCES usuario (login)
+id_user int,
+FOREIGN KEY (id_user) REFERENCES usuario (id_user)
 );
 
 CREATE TABLE escola (
@@ -26,9 +26,9 @@ id_turma int AUTO_INCREMENT PRIMARY KEY,
 apelido varchar (50),
 serie varchar (20),
 periodo varchar (20),
-id_user int,
+id_pedagoga int,
 id_escola int,
-FOREIGN KEY (id_user) REFERENCES pedagoga (id_user),
+FOREIGN KEY (id_pedagoga) REFERENCES pedagoga (id_pedagoga),
 FOREIGN KEY (id_escola) REFERENCES escola (id_escola)
 );
 
