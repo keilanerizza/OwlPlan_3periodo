@@ -1,10 +1,95 @@
 <html>
-    <head>
-        <title>Land Page...</title>
-    </head>
-    <body>
-        <div>
+<head>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css">
+    <title>Landing Page...</title>
+</head>
+<body>
 
+    <!-- login -->
+    <button data-target="modalLogin" class="btn modal-trigger">LOGIN</button>
+    
+    <div id="modalLogin" class="modal">
+        <div class="modal-content">
+            <form class="col s12" action="login" method="post">
+                <div class="input-field col s12">
+                    <input id="emailLogin" placeholder="" type="text" class="validate">
+                    <label for="emailLogin">Email</label>
+                </div>
+                
+                <div class="input-field col s12">
+                    <input id="senhaLogin" placeholder="" type="password" class="validate">
+                    <label for="senhaLogin">Senha</label>
+                </div>
+            </form>
         </div>
-    </body>
+        <div class="modal-footer">
+            <button class="btn waves-effect waves-light modal-close" type="submit" name="logar">Logar</button>
+        </div>
+    </div>
+    <!-- login -->
+    
+    <!-- cadastro -->
+    <button data-target="modalCadastro" class="btn modal-trigger">CADASTRO</button>
+    
+    <div id="modalCadastro" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <form class="col s12"  action="criarUsuario" method="post">
+                    
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="nomeCadastro" placeholder="" type="text" class="validate">
+                            <label for="nomeCadastro">Nome completo</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="emailCadastro" placeholder="" type="email" class="validate">
+                            <label for="emailCadastro">Email</label>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <div class="input-field col s3">
+                                <label>
+                                    <input name="sexo" type="radio" value="F" checked />
+                                    <span>F</span>
+                                </label>
+                            </div>
+                            <div class="input-field col s6">
+                                <label>
+                                    <input name="sexo" type="radio" value="M" />
+                                    <span>M</span>
+                                </label>     
+                            </div>
+                        </div>
+                        <div class="input-field col s6">
+                            <input type="text" placeholder="" class="datepicker">
+                            <label for="nascimento">Data de nascimento:</label>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="senhaCadastro" placeholder="" type="password" class="validate">
+                            <label for="senhaCadastro">Senha</label>
+                        </div>
+                        
+                        <div class="input-field col s6">
+                            <input id="confirmSenha" placeholder="" type="password" class="validate">
+                            <label for="confirmSenha">Confirmar senha</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn waves-effect waves-light" type="submit" name="cadastrar">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/all.js"></script>
+    
+</body>
 </html>

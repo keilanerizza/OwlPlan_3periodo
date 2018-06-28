@@ -10,17 +10,17 @@ import java.util.List;
 import model.javabean.Usuario;
 
 public class TurmaDAO implements DAO{
-	public Usuario busca(String nomeUsuario, String senha) {
+	public Usuario busca(String nome, String email, String senha) {
 		Connection con = FabricaDeConexoes.getConnection();
 		Statement stmt = null;
 		Usuario usuario = null;
 		try {
 			stmt = con.createStatement();
-			String sql = "SELECT nome FROM usuarios where usuario='" + nomeUsuario + "' and senha='" + senha + "'";
+			String sql = "SELECT nome FROM usuarios where usuario='" + nome + "' and senha='" + senha + "'";
 			ResultSet rs = stmt.executeQuery(sql);
 			if (rs.next()) {
-				nomeUsuario = rs.getString("nome");
-				usuario = new Usuario(nomeUsuario);
+				nome = rs.getString("nome");
+				usuario = new Usuario(nome, email, senha);
 			}
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -56,7 +56,7 @@ public class TurmaDAO implements DAO{
 		Usuario usuario = null;
 		try {
 			stmt = con.createStatement();
-			String sql = "insert into usuarios(nome,senha,usuario) values('"+((Usuario)entidade).getNome()+"','"+((Usuario)entidade).getSenha()+"','"+((Usuario)entidade).getNomeUsuario()+"');";
+			String sql = "insert into usuarios(nome,senha,usuario) values('"+((Usuario)entidade).getNome()+"','"+((Usuario)entidade).getSenha()+"','"+((Usuario)entidade).getNome()+"');";
 			stmt.executeUpdate(sql);
 		} catch (SQLException se) {
 			se.printStackTrace();

@@ -16,7 +16,7 @@ public class FabricaDeTarefa {
 		tarefas.put("GET/buscarTurma", new BuscarTurma());
 		tarefas.put("GET/buscarUsuario", new BuscarUsuario());
 		tarefas.put("POST/criarTurma", new CriarTurma());
-		tarefas.put("POST/criarusuario", new CriarUsuario());
+		tarefas.put("POST/criarPedagoga", new CriarPedagoga());
 		tarefas.put("GET/excluirTurma", new ExcluirTurma());
 		tarefas.put("GET/excluirUsuario", new ExcluirUsuario());
 	}

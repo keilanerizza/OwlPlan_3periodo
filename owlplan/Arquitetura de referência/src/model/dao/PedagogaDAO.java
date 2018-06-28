@@ -7,21 +7,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.javabean.Pedagoga;
 import model.javabean.Usuario;
 
-public class UsuarioDAO implements DAO {
+public class PedagogaDAO implements DAO {
 
-	public Usuario busca(String nomeUsuario, String senha) {
+	public Usuario busca(String email, String senha) {
 		Connection con = FabricaDeConexoes.getConnection();
 		Statement stmt = null;
 		Usuario usuario = null;
+		
 		try {
 			stmt = con.createStatement();
-			String sql = "SELECT nome FROM usuarios where usuario='" + nomeUsuario + "' and senha='" + senha + "'";
+			String sql = "SELECT nome, email, senha FROM usuario where email='" + email + "' and senha='" + senha + "';";
 			ResultSet rs = stmt.executeQuery(sql);
 			if (rs.next()) {
-				nomeUsuario = rs.getString("nome");
-				usuario = new Usuario(nomeUsuario);
+				usuario = new Usuario(rs.getString("nome"), email);
 			}
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -50,15 +51,25 @@ public class UsuarioDAO implements DAO {
 
 	@Override
 	public void salvar(Object entidade) {
-		//conectar com sgbd
 		Connection con = FabricaDeConexoes.getConnection();
-		//montar a consulta
 		Statement stmt = null;
-		Usuario usuario = null;
 		try {
 			stmt = con.createStatement();
-			String sql = "insert into usuarios(nome,senha,usuario) values('"+((Usuario)entidade).getNome()+"','"+((Usuario)entidade).getSenha()+"','"+((Usuario)entidade).getNomeUsuario()+"');";
-			stmt.executeUpdate(sql);
+			int lastId = 0;
+			
+			String sqlUser = "insert into usuario(nome,email,senha) values('"+((Usuario)entidade).getNome()+"','"+((Usuario)entidade).getEmail()+"','"+((Usuario)entidade).getSenha()+"');";
+			stmt.executeUpdate(sqlUser);
+			
+			String sqlLastId = "select max(id_user) as id_user from usuario;";
+			ResultSet rs = stmt.executeQuery(sqlLastId);
+			if (rs.next()) {
+				lastId = rs.getInt("id_user");
+			}
+
+			String sqlPed = "insert into pedagoga(sexo,nasc,id_user) values('"+((Pedagoga)entidade).getSexo()+"','"+((Pedagoga)entidade).getNascimento()+"',"+ lastId +");";
+			stmt.executeUpdate(sqlPed);
+			
+			
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} catch (Exception e) {
@@ -84,16 +95,16 @@ public class UsuarioDAO implements DAO {
 	}
 
 	@Override
-	public List listarTodos() {
+	public List<Pedagoga> listarTodos() {
 		Connection con = FabricaDeConexoes.getConnection();
 		Statement stmt = null;
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+		List<Pedagoga> pedagogas = new ArrayList<Pedagoga>();
 		try {
 			stmt = con.createStatement();
-			String sql = "SELECT * FROM usuarios;";
+			String sql = "SELECT * FROM pedagoga, usuario where pedagoga.id_user = usuario.id_user;";
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				usuarios.add(new Usuario(rs.getString("nome"),rs.getString("usuario"),rs.getString("senha")));
+				pedagogas.add(new Pedagoga(rs.getString("nome"),rs.getString("email"),rs.getString("senha"),rs.getString("sexo"),rs.getString("nascimento")));
 			}
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -111,7 +122,7 @@ public class UsuarioDAO implements DAO {
 				se2.printStackTrace();
 			}
 		}
-		return usuarios;
+		return pedagogas;
 	}
 
 }

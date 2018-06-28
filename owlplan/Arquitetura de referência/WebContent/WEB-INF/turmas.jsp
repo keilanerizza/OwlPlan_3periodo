@@ -8,7 +8,7 @@
 <title>Cadastro de usuário</title>
 </head>
 <body>
-<h1>Arquitetura de referência</h1>
+<h1>kkkkkkkk</h1>
 	<hr>
 	<c:choose>
 		<c:when test="${usuario != NULL}">

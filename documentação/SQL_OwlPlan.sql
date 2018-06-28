@@ -3,13 +3,13 @@ use owlplan;
 
 CREATE TABLE usuario (
 id_user int AUTO_INCREMENT PRIMARY KEY,
+nome varchar (100),
 email varchar (50),
 senha varchar (10)
 );
 
 CREATE TABLE pedagoga (
 id_pedagoga int AUTO_INCREMENT PRIMARY KEY,
-nome varchar (100),
 sexo char,
 nasc date,
 id_user int,

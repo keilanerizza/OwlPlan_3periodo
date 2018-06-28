@@ -1,31 +1,28 @@
 package model.javabean;
 
 public class Usuario {
-	private String nome,nomeUsuario,senha;
-
-	public Usuario(String nome) {
-		super();
-		this.nome = nome;
-	}
-
+	private String nome, email, senha;
 	
-	public Usuario(String nome, String nomeUsuario, String senha) {
+	public Usuario(String nome, String email, String senha) {
 		super();
 		this.nome = nome;
-		this.nomeUsuario = nomeUsuario;
+		this.email = email;
 		this.senha = senha;
 	}
 
-
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public Usuario(String nome, String email) {
+		super();
+		this.nome = nome;
+		this.email = email;
+	}
+	
+	public String getNome() {
+		return nome;
 	}
 
-
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-
 
 	public String getSenha() {
 		return senha;
@@ -37,11 +34,11 @@ public class Usuario {
 	}
 
 
-	public String getNome() {
-		return nome;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
