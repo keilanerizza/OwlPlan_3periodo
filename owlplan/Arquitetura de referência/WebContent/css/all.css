@@ -1,0 +1,13 @@
+.sidenav-overlay{
+	background-color:  rgba(0,0,0,0) !important;
+}
+
+#slide-out {
+	height: 80%;
+	margin-top: 165px;
+}
+
+#btnAddTurma {
+	font-size: 20px;
+	margin-right: 4%;
+}

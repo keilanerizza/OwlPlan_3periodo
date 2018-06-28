@@ -7,8 +7,7 @@
 <meta charset="ISO-8859-1">
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
-<link rel="stylesheet"
-	href="../node_modules/materialize-css/dist/css/materialize.min.css">
+<link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css">
 <title>Arquitetura de referência</title>
 </head>
 <body>
