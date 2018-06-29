@@ -12,13 +12,10 @@ public class FabricaDeTarefa {
 		tarefas.put("POST/login", new LoginTarefa());
 		tarefas.put("GET/logout", new LogoutTarefa());
 		tarefas.put("POST/alterarTurma", new AlterarTurma());
-		tarefas.put("POST/alterarUsuario", new AlterarUsuario());
-		tarefas.put("GET/buscarTurma", new BuscarTurma());
-		tarefas.put("GET/buscarUsuario", new BuscarUsuario());
 		tarefas.put("POST/criarTurma", new CriarTurma());
 		tarefas.put("POST/criarPedagoga", new CriarPedagoga());
 		tarefas.put("GET/excluirTurma", new ExcluirTurma());
-		tarefas.put("GET/excluirUsuario", new ExcluirUsuario());
+		tarefas.put("GET/listarEscolas", new ListarEscolas());
 	}
 
 	public static Tarefa getTarefa(HttpServletRequest request) {

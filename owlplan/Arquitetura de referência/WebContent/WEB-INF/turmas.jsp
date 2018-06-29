@@ -49,23 +49,53 @@
 	</div>
 	</nav>
 	<br/>
-	<a id="btnAddTurma" class="waves-effect waves-light btn-large right sidenav-trigger" data-target="slide-out"><i class="material-icons left">add</i>TURMA</a>
+	<a id="btnAddTurma"class="waves-effect waves-light btn-large right sidenav-trigger" data-target="slide-out"><i class="material-icons left">add</i>TURMA</a>
 	
+	<a href="listarEscolas" >listar escolas</a>
+	
+	
+			
 	   <!-- turma -->
 	    <div id="slide-out" class="sidenav row">
 	        <form class="col s12"  action="criarTurma" method="post">
 	            
-	                <div class="input-field col s6">
-	                    <input name="apelidoTurma" id="apelidoTurma" type="text" class="validate"> <label for="apelidoTurma">Apelido da turma</label>
-	                </div>
-	                
-	                <div class="input-field col s6">
-	                    <input name="serieTurma" id="serieTurma" type="text" class="validate"> <label for="serieTurma">Série</label>
-	                </div>
-	                
-	                <div class="input-field col s12">
-	                    <input name="escolaTurma" id="escolaTurma" type="text" class="validate"> <label for="escolaTurma">Escola</label>
-	                </div>
+               <div class="input-field col s12">
+                   <input name="apelidoTurma" id="apelidoTurma" type="text" class="validate"> <label for="apelidoTurma">Apelido da turma</label>
+               </div>
+               
+               <div class="input-field col s12">
+                   <input name="serieTurma" id="serieTurma" type="text" class="validate"> <label for="serieTurma">Série</label>
+               </div>
+               
+               <div class="input-field col s12">
+				   <select>
+					   <option value="" disabled selected>Escolha uma escola</option>
+					   
+					   <c:forEach var="e" items="${escolas}"> 
+					   
+					   		<option value=${e.id_escola}> ${e.nome} </option>
+					   
+					   </c:forEach>
+					   
+				  </select>
+			  	  <label>Escola</label>
+			  </div>
+               
+               <!-- <div class="input-field col s12">
+                   <input name="escolaTurma" id="escolaTurma" type="text" class="validate"> <label for="escolaTurma">Escola</label>
+               </div> -->
+	               
+				<div class="input-field col s12">
+					<label> <input name="periodoTurma" type="radio" value="matutino" checked /> <span>Matutino</span> </label>
+				</div>
+				
+				<div class="input-field col s12">
+					<label> <input name="periodoTurma" type="radio" value="vespertino" /> <span>Vespertino</span> </label>
+				</div>
+				
+				<div class="input-field col s12">
+					<label> <input name="periodoTurma" type="radio" value="noturno" /> <span>Noturno</span> </label>
+				</div>
 	            
 	            <div class="modal-footer">
         	        <button class="btn waves-effect waves-light" type="submit" name="criar">Criar</button>

@@ -2,15 +2,23 @@ package model.javabean;
 
 public class Turma {
 	private String apelido, serie, periodo;
+	private String escola;
 
-	public Turma(String apelido, String serie, String periodo) {
+	public Turma(String apelido, String serie, String periodo, String escola) {
 		super();
 		this.apelido = apelido;
 		this.serie = serie;
 		this.periodo = periodo;
-		
-		
+		this.escola = escola;
 	}
+
+	/*public Escola getEscola() {
+		return escola;
+	}
+
+	public void setEscola(Escola escola) {
+		this.escola = escola;
+	}*/
 
 	public String getApelido() {
 		return apelido;
