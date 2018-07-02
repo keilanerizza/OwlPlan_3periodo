@@ -49,7 +49,15 @@
 	</div>
 	</nav>
 	<br/>
-		
+	
+	<ul>
+		<c:forEach var="t" items="${turmas}"> 
+						   
+			<li value="${t.id_turma}"> ${t.apelido} </li>
+						   
+		</c:forEach>
+	</ul>
+
 	<a id="btnAddTurma" class="waves-effect waves-light btn-large right sidenav-trigger" data-target="slide-out"><i class="material-icons left">add</i>TURMA</a>
 			
 	   <!-- turma -->

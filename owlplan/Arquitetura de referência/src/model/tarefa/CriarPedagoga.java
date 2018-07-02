@@ -10,7 +10,7 @@ public class CriarPedagoga implements Tarefa {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// recuperar os parametros do formulario
+		
 		Pedagoga pedagoga = new Pedagoga(request.getParameter("nomeCadastro"),
 				request.getParameter("emailCadastro"), 
 				request.getParameter("senhaCadastro"), 

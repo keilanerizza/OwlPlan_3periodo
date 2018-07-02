@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.tarefa.FabricaDeTarefa;
 import model.tarefa.ListarEscolas;
+import model.tarefa.ListarTurmas;
 import model.tarefa.Tarefa;
 
 @WebServlet("/frontcontroller/*")
@@ -23,6 +24,7 @@ public class FrontController extends HttpServlet {
 			
 			if(view.equals("turmas")) {
 				new ListarEscolas().getEscolas(request, response);
+				new ListarTurmas().getTurmas(request, response);
 			}
 			
 			request.getRequestDispatcher("../WEB-INF/" + view + ".jsp").forward(request, response);

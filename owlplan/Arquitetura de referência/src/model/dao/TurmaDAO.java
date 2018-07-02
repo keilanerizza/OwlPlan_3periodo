@@ -20,6 +20,13 @@ public class TurmaDAO implements DAO{
 		super();
 		this.request = request;
 	}
+	
+	public String getEmailSession() {
+		HttpSession session = this.request.getSession();
+		
+		return (String) session.getAttribute("email");
+
+	}
 
 	public Usuario busca(String nome, String email, String senha) {
 		Connection con = FabricaDeConexoes.getConnection();
@@ -65,13 +72,8 @@ public class TurmaDAO implements DAO{
 		int Id = 0;
 		try {
 			stmt = con.createStatement();
-			HttpSession session = this.request.getSession();
 			
-			String email_session = (String) session.getAttribute("email");
-			
-			System.out.println(email_session);
-			
-			String sqlIdPedagoga = "select id_pedagoga as id_ped from pedagoga p inner join usuario u on p.id_user = u.id_user where u.email='" + email_session + "';";      
+			String sqlIdPedagoga = "select id_pedagoga as id_ped from pedagoga p inner join usuario u on p.id_user = u.id_user where u.email='" + getEmailSession() + "';";      
 			
 			ResultSet rs = stmt.executeQuery(sqlIdPedagoga);
 			if (rs.next()) {
@@ -110,17 +112,18 @@ public class TurmaDAO implements DAO{
 	}
 
 	@Override
-	public List listarTodos() {
+	public List<Turma> listarTodos() {
 		Connection con = FabricaDeConexoes.getConnection();
 		Statement stmt = null;
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+		List<Turma> turmas = new ArrayList<Turma>();
 		try {
 			stmt = con.createStatement();
-			String sql = "SELECT * FROM usuarios;";
+			String sql = "SELECT * FROM turma t, pedagoga p, usuario u where t.id_pedagoga = p.id_pedagoga and p.id_user = u.id_user and u.email='" + getEmailSession() + "';";
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				usuarios.add(new Usuario(rs.getString("nome"),rs.getString("usuario"),rs.getString("senha")));
+				turmas.add(new Turma(rs.getString("id_turma"),rs.getString("apelido"),rs.getString("serie"),rs.getString("periodo"),rs.getString("id_pedagoga"),rs.getString("id_escola")));
 			}
+			
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} catch (Exception e) {
@@ -137,7 +140,7 @@ public class TurmaDAO implements DAO{
 				se2.printStackTrace();
 			}
 		}
-		return usuarios;
+		return turmas;
 	}
 
 }
