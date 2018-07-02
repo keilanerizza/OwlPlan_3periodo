@@ -16,9 +16,12 @@ public class CriarPedagoga implements Tarefa {
 				request.getParameter("senhaCadastro"), 
 				request.getParameter("sexoCadastro"),
 				request.getParameter("nascimentoCadastro"));
-		// enviar dados para o DAO persistir
+
+		String email = request.getParameter("emailCadastro");
+		request.getSession().setAttribute("email", email);
+
 		new PedagogaDAO().salvar(pedagoga);
-		//retornar o nome da view
+
 		request.setAttribute("msg", "parabéns usuario cadastrado com sucesso");
 		return "turmas";
 	}

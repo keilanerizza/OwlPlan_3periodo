@@ -8,15 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.EscolaDAO;
 import model.javabean.Escola;
 
-public class ListarEscolas implements Tarefa{
+public class ListarEscolas{
 
-	@Override
-	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void getEscolas(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		List<Escola> lista = new EscolaDAO().listarTodos();
-		System.out.println(lista);
 		request.setAttribute("escolas", lista);
-		return "turmas";
-	}
 
+	}
 }

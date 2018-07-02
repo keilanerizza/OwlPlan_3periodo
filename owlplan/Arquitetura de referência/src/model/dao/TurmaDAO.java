@@ -7,9 +7,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import model.javabean.Turma;
 import model.javabean.Usuario;
 
 public class TurmaDAO implements DAO{
+	HttpServletRequest request;
+
+	public TurmaDAO(HttpServletRequest request) {
+		super();
+		this.request = request;
+	}
+
 	public Usuario busca(String nome, String email, String senha) {
 		Connection con = FabricaDeConexoes.getConnection();
 		Statement stmt = null;
@@ -49,15 +60,31 @@ public class TurmaDAO implements DAO{
 
 	@Override
 	public void salvar(Object entidade) {
-		//conectar com sgbd
 		Connection con = FabricaDeConexoes.getConnection();
-		//montar a consulta
 		Statement stmt = null;
-		Usuario usuario = null;
+		int Id = 0;
 		try {
 			stmt = con.createStatement();
-			String sql = "insert into usuarios(nome,senha,usuario) values('"+((Usuario)entidade).getNome()+"','"+((Usuario)entidade).getSenha()+"','"+((Usuario)entidade).getNome()+"');";
+			HttpSession session = this.request.getSession();
+			
+			String email_session = (String) session.getAttribute("email");
+			
+			System.out.println(email_session);
+			
+			String sqlIdPedagoga = "select id_pedagoga as id_ped from pedagoga p inner join usuario u on p.id_user = u.id_user where u.email='" + email_session + "';";      
+			
+			ResultSet rs = stmt.executeQuery(sqlIdPedagoga);
+			if (rs.next()) {
+				Id = rs.getInt("id_ped");
+			}
+			
+			System.out.println("id ped = " + Id);
+			System.out.println(((Turma)entidade).getEscola());
+
+			String sql = "insert into turma(apelido,serie,periodo,id_pedagoga,id_escola) values('"+((Turma)entidade).getApelido()+"','"
+					+((Turma)entidade).getSerie()+"','"+((Turma)entidade).getPeriodo()+"',"+ Id + "," +((Turma)entidade).getEscola() +");";
 			stmt.executeUpdate(sql);
+			
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} catch (Exception e) {

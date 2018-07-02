@@ -15,7 +15,6 @@ public class FabricaDeTarefa {
 		tarefas.put("POST/criarTurma", new CriarTurma());
 		tarefas.put("POST/criarPedagoga", new CriarPedagoga());
 		tarefas.put("GET/excluirTurma", new ExcluirTurma());
-		tarefas.put("GET/listarEscolas", new ListarEscolas());
 	}
 
 	public static Tarefa getTarefa(HttpServletRequest request) {

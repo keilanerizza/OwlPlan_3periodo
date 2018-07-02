@@ -15,7 +15,7 @@ public class LoginTarefa implements Tarefa {
 		Usuario usuario = new PedagogaDAO().busca(email, senha);
 
 		if (usuario != null) {
-			request.getSession().setAttribute("usuario", usuario);
+			request.getSession().setAttribute("email", email);
 			return "turmas";
 		} else {
 			request.setAttribute("erro", "Nome de usuário/senha errado. Tente novamente.");

@@ -49,11 +49,8 @@
 	</div>
 	</nav>
 	<br/>
-	<a id="btnAddTurma"class="waves-effect waves-light btn-large right sidenav-trigger" data-target="slide-out"><i class="material-icons left">add</i>TURMA</a>
-	
-	<a href="listarEscolas" >listar escolas</a>
-	
-	
+		
+	<a id="btnAddTurma" class="waves-effect waves-light btn-large right sidenav-trigger" data-target="slide-out"><i class="material-icons left">add</i>TURMA</a>
 			
 	   <!-- turma -->
 	    <div id="slide-out" class="sidenav row">
@@ -64,20 +61,22 @@
                </div>
                
                <div class="input-field col s12">
-                   <input name="serieTurma" id="serieTurma" type="text" class="validate"> <label for="serieTurma">Série</label>
+                   <input name="serieTurma" id="serieTurma" type="text" placeholder="" class="validate"> <label for="serieTurma">Série</label>
                </div>
                
-               <div class="input-field col s12">
-				   <select>
-					   <option value="" disabled selected>Escolha uma escola</option>
-					   
-					   <c:forEach var="e" items="${escolas}"> 
-					   
-					   		<option value=${e.id_escola}> ${e.nome} </option>
-					   
-					   </c:forEach>
-					   
-				  </select>
+               <div class="input-field col s12" >
+				   
+					   <select name="escolaTurma">
+						   <option value="escolha" disabled selected>Escolha uma escola</option>
+						   
+						   <c:forEach var="e" items="${escolas}"> 
+						   
+						   		<option value=${e.id_escola}> ${e.nome} </option>
+						   
+						   </c:forEach>
+						   
+					  </select>
+				  
 			  	  <label>Escola</label>
 			  </div>
                
@@ -96,9 +95,11 @@
 				<div class="input-field col s12">
 					<label> <input name="periodoTurma" type="radio" value="noturno" /> <span>Noturno</span> </label>
 				</div>
+				
+				<br/><br/><br/>
 	            
 	            <div class="modal-footer">
-        	        <button class="btn waves-effect waves-light" type="submit" name="criar">Criar</button>
+        	        <button class="btn waves-effect waves-light right" type="submit" name="criar">Criar</button>
                 </div>
 	            
 	        </form>
