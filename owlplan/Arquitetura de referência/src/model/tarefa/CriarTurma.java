@@ -10,13 +10,26 @@ public class CriarTurma implements Tarefa{
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Turma turma = new Turma(
-			request.getParameter("apelidoTurma"),
-			request.getParameter("serieTurma"), 
-			request.getParameter("periodoTurma"),
-			request.getParameter("escolaTurma"));
 		
-		new TurmaDAO(request).salvar(turma);
+		String valorSubmit = request.getParameter("name");
+		
+		if(valorSubmit.equals("criar")) {
+			Turma turma = new Turma(
+					request.getParameter("apelidoTurma"),
+					request.getParameter("serieTurma"), 
+					request.getParameter("periodoTurma"),
+					request.getParameter("escolaTurma"));
+			
+			new TurmaDAO(request).salvar(turma);
+			
+		} else if (valorSubmit.equals("editar")) {
+			
+			new AlterarTurma().executa(request, response);
+		
+		} else if (valorSubmit.equals("excluir")) {
+			
+			new ExcluirTurma().executa(request, response);
+		}
 
 		request.setAttribute("msg", "parabéns usuario cadastrado com sucesso");
 		return "turmas";

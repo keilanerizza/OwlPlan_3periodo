@@ -1,9 +1,5 @@
 package model.dao;
 
-import java.util.List;
-
-import model.javabean.Escola;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EscolaDAO implements DAO{
+import model.javabean.Plano;
+import model.javabean.Turma;
+
+public class PlanoDAO implements DAO {
 
 	@Override
 	public Object recuperarPorId(Object id) {
@@ -32,17 +31,20 @@ public class EscolaDAO implements DAO{
 	}
 
 	@Override
-	public List<Escola> listarTodos() {
+	public List<Plano> listarTodos() {
 		Connection con = FabricaDeConexoes.getConnection();
 		Statement stmt = null;
-		List<Escola> escolas = new ArrayList<Escola>();
+		
+		List<Plano> planos = new ArrayList<Plano>();
 		try {
 			stmt = con.createStatement();
-			String sql = "SELECT * FROM escola;";
+			String sql = "SELECT * from planejamento;";
 			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				escolas.add(new Escola(rs.getString("nome"), rs.getString("id_escola")));
+			
+			while(rs.next()) {
+				planos.add(new Plano(rs.getString("id_plan"), rs.getString("imagem"), rs.getString("id_turma"), rs.getString("id_layout")));
 			}
+			
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} catch (Exception e) {
@@ -59,7 +61,7 @@ public class EscolaDAO implements DAO{
 				se2.printStackTrace();
 			}
 		}
-		return escolas;
+		return planos;
 	}
 
 	@Override

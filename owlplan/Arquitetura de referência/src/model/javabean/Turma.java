@@ -1,9 +1,19 @@
 package model.javabean;
 
 public class Turma {
-	private String id_turma, apelido, serie, periodo, id_pedagoga, escola;
+	private String id_turma, apelido, novoApelido, serie, periodo, id_pedagoga, escola;
+	
+	public Turma(String apelido, String novoApelido, String serie, String periodo, String escola) {
+		super();
+		this.apelido = apelido;
+		this.novoApelido = novoApelido;
+		this.serie = serie;
+		this.periodo = periodo;
+		this.escola = escola;
+	}
 	
 	public Turma(String apelido, String serie, String periodo, String escola) {
+		super();
 		this.apelido = apelido;
 		this.serie = serie;
 		this.periodo = periodo;
@@ -20,8 +30,6 @@ public class Turma {
 		this.id_pedagoga = id_pedagoga;
 	}
 
-	
-	
 	public String getId_turma() {
 		return id_turma;
 	}
@@ -68,6 +76,14 @@ public class Turma {
 
 	public void setPeriodo(String periodo) {
 		this.periodo = periodo;
+	}
+
+	public String getNovoApelido() {
+		return novoApelido;
+	}
+
+	public void setNovoApelido(String novoApelido) {
+		this.novoApelido = novoApelido;
 	}
 	
 	

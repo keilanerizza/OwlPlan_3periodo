@@ -125,4 +125,10 @@ public class PedagogaDAO implements DAO {
 		return pedagogas;
 	}
 
+	@Override
+	public void atualizar(Object entidade) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

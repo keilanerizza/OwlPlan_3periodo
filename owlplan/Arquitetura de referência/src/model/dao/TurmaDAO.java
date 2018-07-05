@@ -79,9 +79,6 @@ public class TurmaDAO implements DAO{
 			if (rs.next()) {
 				Id = rs.getInt("id_ped");
 			}
-			
-			System.out.println("id ped = " + Id);
-			System.out.println(((Turma)entidade).getEscola());
 
 			String sql = "insert into turma(apelido,serie,periodo,id_pedagoga,id_escola) values('"+((Turma)entidade).getApelido()+"','"
 					+((Turma)entidade).getSerie()+"','"+((Turma)entidade).getPeriodo()+"',"+ Id + "," +((Turma)entidade).getEscola() +");";
@@ -106,9 +103,33 @@ public class TurmaDAO implements DAO{
 	}
 
 	@Override
-	public void excluir(Object id) {
-		// TODO Auto-generated method stub
+	public void excluir(Object entidade) {
+		Connection con = FabricaDeConexoes.getConnection();
+		Statement stmt = null;
+		
+		String apelido = ((Turma) entidade).getApelido();
+		
+		try {
+			stmt = con.createStatement();
+			String sql = "delete from turma where apelido = '" + apelido + "';";
 
+			stmt.executeUpdate(sql);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException se2) {
+				se2.printStackTrace();
+			}
+		}
 	}
 
 	@Override
@@ -118,10 +139,12 @@ public class TurmaDAO implements DAO{
 		List<Turma> turmas = new ArrayList<Turma>();
 		try {
 			stmt = con.createStatement();
-			String sql = "SELECT * FROM turma t, pedagoga p, usuario u where t.id_pedagoga = p.id_pedagoga and p.id_user = u.id_user and u.email='" + getEmailSession() + "';";
+			String sql = "SELECT t.id_turma, t.apelido, t.serie, t.periodo, t.id_pedagoga, e.nome FROM turma t, pedagoga p, usuario u, escola e "
+					+ "where e.id_escola = t.id_escola and t.id_pedagoga = p.id_pedagoga and p.id_user = u.id_user and u.email='" + getEmailSession() + "';";
 			ResultSet rs = stmt.executeQuery(sql);
+			
 			while(rs.next()) {
-				turmas.add(new Turma(rs.getString("id_turma"),rs.getString("apelido"),rs.getString("serie"),rs.getString("periodo"),rs.getString("id_pedagoga"),rs.getString("id_escola")));
+				turmas.add(new Turma(rs.getString("t.id_turma"),rs.getString("t.apelido"),rs.getString("t.serie"),rs.getString("t.periodo"),rs.getString("t.id_pedagoga"),rs.getString("e.nome")));
 			}
 			
 		} catch (SQLException se) {
@@ -141,6 +164,41 @@ public class TurmaDAO implements DAO{
 			}
 		}
 		return turmas;
+	}
+
+	@Override
+	public void atualizar(Object entidade) {
+		Connection con = FabricaDeConexoes.getConnection();
+		Statement stmt = null;
+		
+		try {
+			String apelido = ((Turma) entidade).getApelido();
+			String novoApelido = ((Turma) entidade).getNovoApelido();
+			String periodo = ((Turma) entidade).getPeriodo();
+			String escola = ((Turma) entidade).getEscola();
+			String serie = ((Turma) entidade).getSerie();
+			
+			stmt = con.createStatement();
+			String sql = "UPDATE turma SET apelido = '" + novoApelido + "', periodo ='" + periodo + "', serie = '"
+					+ serie + "', id_escola = " + escola + " WHERE apelido = '" + apelido + "';";
+			stmt.executeUpdate(sql);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException se2) {
+				se2.printStackTrace();
+			}
+		}
+
 	}
 
 }
